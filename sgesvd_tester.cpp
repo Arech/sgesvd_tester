@@ -223,7 +223,33 @@ void run_tests(bool& ff, bool& df) {
 }
 
 //////////////////////////////////////////////////////////////////////////
+void report_env() {
+	auto rep = [](const char* pV) {
+		constexpr size_t bs = 256;
+		char envar[bs];
+		size_t s;
+
+		bool b = false;
+		STDCOUT(pV << " = ");
+		if (0 == ::getenv_s(&s, envar, pV)) {
+			if (s > 0) {
+				STDCOUTL(envar);
+				b = true;
+			}
+		}
+		if (!b)STDCOUTL("not found");
+	};
+
+	STDCOUTL("--- reporting some environment vars");
+	rep("OMP_NUM_THREADS");
+	rep("OPENBLAS_NUM_THREADS");
+	STDCOUTL("/---");
+}
+
+//////////////////////////////////////////////////////////////////////////
 int main() {
+	report_env();
+
 #ifdef ALSO_TEST_DENORMALS
 	STDCOUTL("Running tests with enabled denormals.");
 #else
