@@ -1,11 +1,11 @@
-# Isolated code to make issue with OpenBLAS::LAPACKE_sgesvd() appear
+# Isolated code to make the issue with OpenBLAS::LAPACKE_sgesvd() appear
 
-On how to compile the proper OpenBLAS binary see [the issue](https://github.com/xianyi/OpenBLAS/issues/2297).
+On how to make OpenBLAS binary for the test see [the issue](https://github.com/xianyi/OpenBLAS/issues/2297).
 
 
-VC2015 is used to build the project, though probably any modern compiler will work, just update building instructions to make it build this simple x64 console app.
+VC2015 is used to build the project, though probably any modern C++ compiler will work, just update building instructions to make it build this simple x64 console app.
 
-1. In the `Project Property pages` update section `VC++ Directories`:
+1. If you're using published VC project, then perform update in the `Project Property pages` section `VC++ Directories`:
 
      1. set correct path to OpenBLAS distro's `./include` folder in `Include Directories`
      2. set correct path to OpenBLAS distro's `./lib` folder in `Library Directories`
@@ -13,7 +13,7 @@ VC2015 is used to build the project, though probably any modern compiler will wo
 
 3. copy the properly compiled `libopenblas.dll` in question and all the necessary mingw-w64 env .dll's (at least you would need `libgfortran-#.dll` and its dependecies) near the project's `.exe`
 
-4. run `.exe`
+4. run/debug `.exe`
 
 What to expect:
 
